@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<link rel="stylesheet" href="css/mycss.css">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SEA Kurs</title>
+	<script src="javaScript/myscript.js" type="module"></script>   
+</head>
+<body>
+	<header>
+		<h2>Gruppe SEA - Welle 4</h2>
+	</header>
+	<div class="tableFixHead">	
+		<table style="border:1px solid #888a85" class="table table-dark" id="tid001">
+			<thead class="hideit" id="thid001"> 
+				<tr> 
+					<th scope="col">#</th>
+					<th scope="col">Profile</th>
+					<th scope="col">ID</th>
+					<th scope="col">Anrede</th>
+					<th scope="col">Vorname</th>
+					<th scope="col">Nachname</th>
+					<th scope="col">Geburtsdatum</th>
+					<th scope="col">Standort</th>
+					<th scope="col">E-Mail-Adresse</th>
+				</tr>
+			</thead>
+			<tbody id="tbid001">
+			<!--    
+				<tr>
+					<td>03</td>
+					<td><img src="images/man.png" width=25px height=25px></td>
+					<td id="IdAnredeHerr">Herr</td>
+					<td id="IdVornameMicki">Micki</td>
+					<td id="IdNachnameMaus">Maus</td>
+				</tr>
+			-->
+			</tbody>
+		</table>
+	</div>
+	<article>		
+		<h4><span class="blink"><strong> >>>  Jetzt hier bei uns anmelden!  <<< </strong></span></h4>
+			<form id="idform">
+				<table class="input">
+					<tr>
+						<td><label for="id000">ID</label></td>
+						<td><input type="text" id="id000" name="id"></td>
+					</tr>
+					<tr> 			
+						<td><label for="id001">Anrede:</label></td>
+						<td><select name="anrede" id="id001">
+							<option>Frau</option>
+							<option>Herr</option>
+							<option value="Sonstiges">Sonstiges</option>
+						</select></td>
+						<td><label for="id002">Vorname:</label></td>
+						<td><input type="text" id="id002" name="vorname"></td> 
+						<td><label for="id003">Nachname:</label></td>
+						<td><input type="text" id="id003" name="nachname"></td>
+					</tr>	
+					<tr>
+						<td><label for="id004">Geburtsdatum:</label></td>
+						<td><input type="date" id="id004" name="datum"></td>
+						<td><label for="id005">Standort:</label></td>
+						<td><select name="standort" id="id005">
+							<option>Berlin</option>
+							<option>Bonn</option>
+							<option>Budapest</option>
+							<option>Darmstadt</option>
+							<option>Koeln</option>
+							<option>Muenster</option>
+							<option>Magdeburg</option>
+						</select></td>
+						<td><label for="id006">E-Mail:</label></td>
+						<td><input type="email" id="id006" name="email"></td>
+					</tr>
+					<tr class="button">
+						<td style="padding-top: 50px" class="button" colspan="6">
+						<input type="submit" id="id010" value="Submit">
+						<input type="submit" id="id012" value="Delete">			
+						<input type="submit" id="id013" value="Update">
+						<input type="submit" id="id014" value="Delete all">
+						<input type="submit" id="id015" value="Refresh"></td>
+					</tr>
+				</table>
+			</form>				
+	</article>
+	<div>
+  		<p>to see template for persons click:
+  			<a href=/personen>here</a>
+  		</p>
+	</div>
+	<footer style="position: absolute; bottom: 10px; width: 100%; background-color: #e10074">
+  		<img src="images/telekom.png" > <br/>
+  		<a href="https://www.telekom.de/start" id="id4711" style="color: #ffffff">
+			<button>Werbung</button>	
+		</a>
+  	</footer>		
+</body>
+</html>

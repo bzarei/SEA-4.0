@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/* Style of body */
+body {
+	font-family: var(- -bs-font-sans-serif);
+	-bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, "Noto Sans";
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #eeeeec;
+}
+
+h2 { text-align: center; }
+
+h4 { text-align: center; }
+
+p,a { color: #f9076d; }
+
+form {
+	text-align: center;
+}
+
+table {
+	caption-side: bottom;
+ 	border-collapse: separate; /*collapse; */
+	box-sizing: border-box; 
+ 	vertical-align: middle;
+	width: 100%;
+	margin-bottom: 1rem;
+	color: #204a87;
+	vertical-align: top;
+	border-color: #888a85;
+	background-color: #ffffff;
+}
+
+table.input {
+	background-color: inherit;
+	border: unset;	
+}
+
+table.input td {
+	border: unset;
+	text-align: left;
+}
+
+table.input select {
+	width: 60%;
+}
+
+tr.button {
+	min-height: 50pt;
+}
+
+td.button {
+	height: 100%;
+	vertical-align: bottom;
+}
+
+th {
+	border: 1px solid #bbc0b8;
+	background-color: #f9076d;
+	color: #ffffff;	
+}
+
+td {
+	border: 1px solid #bbc0b8;
+	text-align: center;
+}
+
+/* Visibility */
+.hideit {
+	display:none;	
+}
+
+/* Style of blinking text */
+.blink {
+    animation-name: animation_blink;
+    animation-timing-function: ease-in;
+    animation-duration: 2s; 
+    animation-iteration-count: infinite;
+    color: #f9076d;            
+}
+@keyframes animation_blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.1; }
+    100% { opacity: 1; }    
+}
+
+.tableFixHead {
+	overflow-y: auto;
+	height: 230px;
+}
+
+.tableFixHead thead th {
+	position: sticky;
+	top: 0;
+}
+

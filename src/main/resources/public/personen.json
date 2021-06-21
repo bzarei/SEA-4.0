@@ -1,0 +1,22 @@
+{
+	"personen": [
+		{
+			"id": "1",
+			"anrede": "Frau",
+			"vorname": "Salma",
+			"nachname": "Alizadeh"
+		},
+		{
+			"id": "2",
+			"anrede": "Herr",
+			"vorname": "Bobi",
+			"nachname": "Zamani"
+		},
+		{
+			"id": "3",
+			"anrede": "",
+			"vorname": "Otto",
+			"nachname": "Magler"
+		}
+	]
+}
