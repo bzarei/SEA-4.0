@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="persons_sea4")
@@ -15,7 +16,10 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")
-	private Long id;       // defaul (-1)
+	private Long id;       // default (-1)
+	
+	@Version
+	private Long version;  // Version des Datensatzes in Datenbank
 	
 	@Column(name="ANREDE")
 	private String anrede;
