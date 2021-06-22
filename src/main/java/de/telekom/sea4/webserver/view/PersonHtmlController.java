@@ -34,17 +34,17 @@ public class PersonHtmlController {
 		this.personService = personService;
 	}
 
-//	@GetMapping("/size") // URL: "http://localhost:8080/size" über diese Url wird die Methode getSize() erreicht
-//	@ResponseBody // somit sagen wir dem Spring dass die Rückgabe-html String die Antwort in body 					// ist
-//	public String getSize() { // Rückgabe ist html
-//		return String.format(HTML_TEMPLATE, personService.size());
-//	}
+	@GetMapping("/size") // URL: "http://localhost:8080/size" über diese Url wird die Methode getSize() erreicht
+	@ResponseBody // somit sagen wir dem Spring dass die Rückgabe-html String die Antwort in body 					// ist
+	public String getSize() { // Rückgabe ist html
+		return String.format(HTML_TEMPLATE, personService.size());
+	}
 	
-//	@GetMapping("/size2")
-//	public String getSize2(Model model) {
-//		model.addAttribute("size3", personService.size());
-//		return "size";    // template size.html 
-//	}
+	@GetMapping("/size2")
+	public String getSize2(Model model) {
+		model.addAttribute("size3", personService.size());
+		return "size";    // template size.html 
+	}
 
 	@GetMapping("/count") // URL: "http://localhost:8080/count" über diese Url wird die Methode getCount() erreicht
 	public String getCount(Model model) { // Rückgabe ist html
@@ -68,10 +68,4 @@ public class PersonHtmlController {
 		model.addAttribute("name", str);
 		return "count";       // template count.html
 	}
-	
-//	@GetMapping("/personen")
-//	public String getPersonen(Model model) {
-//		model.addAttribute("PersonenList", personService.getAll4ServerTemplate());
-//		return "personen";   // template personen.html
-//	}
 }

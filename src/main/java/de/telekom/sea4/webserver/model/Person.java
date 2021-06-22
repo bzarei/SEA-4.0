@@ -1,5 +1,6 @@
 package de.telekom.sea4.webserver.model;
 
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,30 +11,31 @@ import javax.persistence.Table;
 public class Person {
 	
 	@Id
-	private Long id;    // defaul (-1)
+	@Column(name="ID")
+	private Long id;       // defaul (-1)
 	
-	@Column
+	@Column(name="ANREDE")
 	private String anrede;
 	
-	@Column
+	@Column(name="VORNAME")
 	private String vorname;
 	
-	@Column
+	@Column(name="NACHNAME")
 	private String nachname;
 	
 	@Column(name="GEBURTSDATUM")
-	private String birthDate;
+	private LocalDate birthDate;
 	
-	@Column
+	@Column(name="STANDORT")
 	private String standort;
 	
-	@Column
+	@Column(name="EMAIL")
 	private String email;
 	
 	public Person() {
 	}
 	
-	public Person(int id, String anrede, String vorname, String nachname, String birthDate, String standort, String email) {
+	public Person(int id, String anrede, String vorname, String nachname, LocalDate birthDate, String standort, String email) {
 		this.id = (long) id;
 		this.anrede = anrede;
 		this.vorname = vorname;
@@ -43,11 +45,11 @@ public class Person {
 		this.email = email;
 	}
 	
-	public String getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 

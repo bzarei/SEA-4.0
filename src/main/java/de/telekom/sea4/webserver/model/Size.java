@@ -2,14 +2,14 @@ package de.telekom.sea4.webserver.model;
 
 public class Size {
 
-	private int size;
+	private long size;
 
-	public Size(int size) {
+	public Size(long size) {
 		super();
 		this.size = size;
 	}
 	
-	public int getSize() {
+	public long getSize() {
 		return size;
 	}
 

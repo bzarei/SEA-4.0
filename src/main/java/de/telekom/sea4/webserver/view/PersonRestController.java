@@ -1,5 +1,6 @@
 package de.telekom.sea4.webserver.view;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,32 +28,32 @@ public class PersonRestController {
 		this.personService = personService;
 	}
 	
-//	/**
-//	 * @see <a href="http://localhost:8080/json/persons/all">http://localhost:8080/json/persons/all</a>
-//	 */
-//	@GetMapping("/json/persons/all")  
-//	public Personen getAllPersons() {  	
-//		return personService.getAll();
-//	}
-//	
-//	/**
-//	 * @see <a href="http://localhost:8080/json/persons/size">http://localhost:8080/json/persons/size</a>
-//	 * @return
-//	 */
-//	@GetMapping("/json/persons/size")  
-//	public Size getSize() {
-//		return new Size(personService.size());
-//	}
-//	
-//	/**
-//	 * @see <a href="http://localhost:8080/json/person/{id}">http://localhost:8080/json/person/{id}</a>
-//	 * @return
-//	 */
-//	@GetMapping("/json/person/{id}")  
-//	public Person getPerson(@PathVariable("id") int id) {
-//		return personService.get(id);
-//	}
-//	
+	/**
+	 * @see <a href="http://localhost:8080/json/persons/all">http://localhost:8080/json/persons/all</a>
+	 */
+	@GetMapping("/json/persons/all")  
+	public Personen getAllPersons() {  	
+		return personService.getAll();
+	}
+	
+	/**
+	 * @see <a href="http://localhost:8080/json/persons/size">http://localhost:8080/json/persons/size</a>
+	 * @return
+	 */
+	@GetMapping("/json/persons/size")  
+	public Size getSize() {
+		return new Size(personService.size());
+	}
+	
+	/**
+	 * @see <a href="http://localhost:8080/json/person/{id}">http://localhost:8080/json/person/{id}</a>
+	 * @return
+	 */
+	@GetMapping("/json/person/{id}")  
+	public Optional<Person> getPerson(@PathVariable("id") Long id) {
+		return personService.get(id);
+	}
+	
 	/**
 	 * @see <a href="http://localhost:8080/json/person">http://localhost:8080/json/person</a>
 	 * @return

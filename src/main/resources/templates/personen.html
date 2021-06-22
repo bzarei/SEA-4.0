@@ -8,12 +8,12 @@
 	<body>
 		<ul th:each="person : ${PersonenList}">
 			<li th:text="${person.id}">ID</li>
-			<li th:text="${person.anrede}">Anrede</li>
-			<li th:text="${person.vorname}">Vorname</li>
-			<li th:text="${person.nachname}">Nachname</li>
-			<li th:text="${person.birthDate}">Geburtsdatum</li>
-			<li th:text="${person.standort}">Standort</li>
-			<li th:text="${person.email}">E-Mail-Adresse</li>
+			<li th:text="${person.anrede}">NN</li>
+			<li th:text="${person.vorname}">NN</li>
+			<li th:text="${person.nachname}">NN</li>
+			<li th:text="${person.birthDate}">NN</li>
+			<li th:text="${person.standort}">NN</li>
+			<li th:text="${person.email}">NN</li>
 		</ul>
 		<a th:href="@{/index.html}">Back to Home page SEA</a>
 	</body>

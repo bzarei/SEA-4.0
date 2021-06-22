@@ -7,20 +7,19 @@ public class Personen {
 	
 	private List<Person> personen = new ArrayList<Person>();
 
-	public List<Person> getPersonen() {
-		return personen;
-	}
+	// standard constructor
+	public Personen() { }
 	
+	// constructor mit ArrayList
 	public Personen(List<Person> all) {
 		this.personen = all;
+	}
+	
+	public List<Person> getPersonen() {
+		return personen;
 	}
 
 	public void setPersonen(List<Person> personen) {
 		this.personen = personen;
 	}
-	
-	public List<Person> getPersones() {
-		return personen;
-	}
-
 }
