@@ -70,6 +70,25 @@ function onDeleteClick(event) {
 	});	
 }
 
+function getOnePersonAndPackInHtml(person) {
+	document.getElementById("id001").value = person.anrede;
+	document.getElementById("id002").value = person.vorname;
+	document.getElementById("id003").value = person.nachname;
+	document.getElementById("id004").value = person.birthDate;
+	document.getElementById("id005").value = person.standort;
+	document.getElementById("id006").value = person.email;
+}
+
+function onSearchClick(event) {
+	event.preventDefault();
+	var id = document.getElementById("id000").value;
+	fetch(`/json/person/${id}`, {
+		method: 'GET',  // Optional
+	}) 
+	.then(getJson)
+	.then(getOnePersonAndPackInHtml); 		
+}
+
 function onDeleteAllClick(event) {
 	event.preventDefault();
 	fetch("/json/person/all", {
@@ -88,7 +107,7 @@ function getJson(serverResponse) { 	// serverResponse beinhaltet json mit allen 
 * (class .hideit in mycss.css)
 * und wenn mindestens eine Person submitet ist soll die Tabelle nach dem Refresh mit header angezeigt werden.    
 */
-function getTxtFromJsonUndPackInsHTMLForTable(myjson) {
+function getAllPersonsFromJsonUndPackInHTMLForTable(myjson) {
 	var i = 0;
 	var t_header = document.getElementById("thid001");
 	var t_body = document.getElementById("tbid001");
@@ -134,7 +153,7 @@ function refreshTable() {
 	// Verbindung mit dem Server für Anzeige aller Personen bzw. fetch lädt die Seite auf dem Server
 	fetch("/json/persons/all")
 		.then(getJson) 				  	 // entspricht: .then( irgendwas => irgendwas.json() )
-		.then(getTxtFromJsonUndPackInsHTMLForTable)  // entpricht: cell.textContent = myjson.personen[0].vorname);
+		.then(getAllPersonsFromJsonUndPackInHTMLForTable)  // entpricht: cell.textContent = myjson.personen[0].vorname);
 }
 
 refreshTable();
@@ -152,5 +171,10 @@ document.getElementById("id013").addEventListener("click",onUpdateClick);
 document.getElementById("id014").addEventListener("click",onDeleteAllClick);
 
 // Refresh
-document.getElementById("id015").addEventListener("click",onRefreshClick);		
+document.getElementById("id015").addEventListener("click",onRefreshClick);
+
+// Search
+document.getElementById("id016").addEventListener("click",onSearchClick);
+
+		
 		
