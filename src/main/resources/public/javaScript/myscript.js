@@ -151,9 +151,11 @@ function onRefreshClick() {
    wird neu gebaut */
 function refreshTable() { 
 	// Verbindung mit dem Server für Anzeige aller Personen bzw. fetch lädt die Seite auf dem Server
-	fetch("/json/persons/all")
-		.then(getJson) 				  	 // entspricht: .then( irgendwas => irgendwas.json() )
-		.then(getAllPersonsFromJsonUndPackInHTMLForTable)  // entpricht: cell.textContent = myjson.personen[0].vorname);
+	try {
+		fetch("/json/persons/all")
+			.then(getJson) 				  	 // entspricht: .then( irgendwas => irgendwas.json() )
+			.then(getAllPersonsFromJsonUndPackInHTMLForTable)  // entpricht: cell.textContent = myjson.personen[0].vorname);
+	} catch (exception) { alert("Aktualisierung der Tabelle kann nicht erfolgen!"); }		
 }
 
 refreshTable();
