@@ -2,6 +2,8 @@ package de.telekom.sea4.webserver.view;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,8 +52,13 @@ public class PersonRestController {
 	 * @return
 	 */
 	@GetMapping("/json/person/{id}")  
-	public Optional<Person> getPerson(@PathVariable("id") Long id) {
-		return personService.get(id);
+	public ResponseEntity<Person> getPerson(@PathVariable("id") Long id) {
+		Optional<Person> op = personService.get(id);
+		if (op.isEmpty()) {
+			return new ResponseEntity<Person>(HttpStatus.NOT_FOUND); 
+		} else {
+			return new ResponseEntity<Person>(op.get(),HttpStatus.OK );
+		  }
 	}
 	
 	/**
