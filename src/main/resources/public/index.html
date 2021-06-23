@@ -24,6 +24,7 @@
 					<th scope="col">Geburtsdatum</th>
 					<th scope="col">Standort</th>
 					<th scope="col">E-Mail-Adresse</th>
+					<!--th scope="col">Version</th-->
 				</tr>
 			</thead>
 			<tbody id="tbid001">
@@ -31,10 +32,10 @@
 		</table>
 	</div>
 	<article>		
-		<h4><span class="blink"><strong> >>>  Jetzt hier bei uns anmelden!  <<< </strong></span></h4>
+		<h4><span class="blink hideit" id="idblink"><strong> >>>  Jetzt hier bei uns anmelden!  <<< </strong></span></h4>
 			<form id="idform">
 				<table class="input">
-					<tr>
+					<tr class="hideit" id="id017">
 						<td><label for="id000">ID</label></td>
 						<td><input type="text" id="id000" name="id"></td>
 					</tr>
@@ -65,6 +66,8 @@
 						</select></td>
 						<td><label for="id006">E-Mail:</label></td>
 						<td><input type="email" id="id006" name="email"></td>
+						<td class="hideit"><label for="id018">Version:</label></td>
+						<td class="hideit"><input type="text" id="id018" name="version"></td>
 					</tr>
 					<tr class="button">
 						<td style="padding-top: 50px" class="button" colspan="6">
@@ -72,17 +75,18 @@
 						<input type="submit" id="id012" value="Delete">			
 						<input type="submit" id="id013" value="Update">
 						<input type="submit" id="id014" value="Delete all">
-						<input type="submit" id="id015" value="Refresh">
+						<input type="submit" id="id015" value="Refresh">											
 						<input type="submit" id="id016" value="Search"></td>
 					</tr>
 				</table>
 			</form>				
 	</article>
-	<!-- div>
-  		<p>to see template for persons click:
-  			<a href=/personen>here</a>
+	<div>
+		<br/>
+  		<p>Mehr ueber uns erfahren Sie:
+  			<a href="https://www.telekom.com/de/karriere">here</a>
   		</p>
-	</div -->
+	</div>
 	<footer style="position: absolute; bottom: 10px; width: 100%; background-color: #e10074">
   		<img src="images/telekom.png" > <br/>
   		<a href="https://www.telekom.de/start" id="id4711" style="color: #ffffff">
