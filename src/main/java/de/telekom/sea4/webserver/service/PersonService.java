@@ -49,9 +49,9 @@ public class PersonService {
 		System.out.println("Person ist gelöscht.");
 	}
 	
-	public Person update(Person p) {
+	public Person update(Person person) {
 		System.out.println("Person wird aktualisiert.");
-		return personRepository.save(p);
+		return personRepository.save(person);
 	}
 
 	public void removeAll() {

@@ -9,4 +9,5 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 	
 	//No code is necessary
 	//This is needed for working Spring-Boot
+
 }

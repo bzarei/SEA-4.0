@@ -67,14 +67,14 @@ public class PersonRestController {
 	 */
 	@PostMapping("/json/person")  
 	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-		Person p = personService.add(person);
-		ResponseEntity<Person> re;
-		if (p == null) {
-			re = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST);     // 204: bad request
+		Person pers = personService.add(person);
+		ResponseEntity<Person> respEntity;
+		if (pers == null) {
+			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST);     // 204: bad request
 		} else {
-			re = ResponseEntity.ok(p);
+			respEntity = ResponseEntity.ok(pers);
 		  }
-		return re;
+		return respEntity;
 	}
 	
 	/**
@@ -96,8 +96,8 @@ public class PersonRestController {
 	 * @return
 	 */
 	@PutMapping("/json/person/{id}")  
-	public Person updatePerson(@PathVariable("id") Long id, @RequestBody Person p) {
-		return personService.update(p);
+	public Person updatePerson(@PathVariable("id") Long id, @RequestBody Person person) {
+		return personService.update(person);
 	}
 	
 }

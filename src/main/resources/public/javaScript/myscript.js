@@ -21,6 +21,10 @@ function getPictoImg(anrede) {
 	}
 }
 
+function getJson(serverResponse) { 	// serverResponse beinhaltet json mit allen kommunikations-metadaten
+	return serverResponse.json();	// .json ist der reine json-inhalt
+}
+
 // Submit: aus dem Browser einlesen und an den Server posten (method: POST)
 function oninputclick(event) {   // bei event-click
 	event.preventDefault();      // verhindert dass das event von Browser verwendet wird (verhindert GET-Request)
@@ -31,7 +35,8 @@ function oninputclick(event) {   // bei event-click
 	var date = document.getElementById("id004").value;
 	var ort = document.getElementById("id005").value;
 	var email = document.getElementById("id006").value;
-	var jsonDataString = `{"id":"${id}","anrede":"${anrede}","vorname":"${vorname}","nachname":"${nachname}","birthDate":"${date}","standort":"${ort}","email":"${email}"}`;
+	var version = document.getElementById("id018").value;
+	var jsonDataString = `{"id":"${id}","anrede":"${anrede}","vorname":"${vorname}","nachname":"${nachname}","birthDate":"${date}","standort":"${ort}","email":"${email}", "version":"${version}"}`;
 		
 	fetch("/json/person", {
 		method: 'POST',
@@ -52,7 +57,8 @@ function onUpdateClick(event) {
 	var date = document.getElementById("id004").value;
 	var ort = document.getElementById("id005").value;
 	var email = document.getElementById("id006").value;
-	var jsonDataString = `{"id":"${id}","anrede":"${anrede}","vorname":"${vorname}","nachname":"${nachname}","birthDate":"${date}","standort":"${ort}","email":"${email}"}`;
+	var version = document.getElementById("id018").value;
+	var jsonDataString = `{"id":"${id}","anrede":"${anrede}","vorname":"${vorname}","nachname":"${nachname}","birthDate":"${date}","standort":"${ort}","email":"${email}","version":"${version}"}`;	
 		
 	fetch(`/json/person/${id}`, {
 		method: 'PUT',
@@ -64,10 +70,14 @@ function onUpdateClick(event) {
 // Delete: ID aus dem Browser einlesen und an den Server zum DELETE routen
 function onDeleteClick(event) {   
 	event.preventDefault();
+	// ID wird eingeblendet
+//	document.getElementById("id017").classList.remove("hideit"); 
 	var id = document.getElementById("id000").value;
-	fetch(`/json/person/${id}`, {
-		method: 'DELETE'
-	});	
+//	if (id != empty ) { 
+		fetch(`/json/person/${id}`, {
+			method: 'DELETE'
+		});
+//	}	
 }
 
 function getOnePersonAndPackInHtml(person) {
@@ -77,16 +87,22 @@ function getOnePersonAndPackInHtml(person) {
 	document.getElementById("id004").value = person.birthDate;
 	document.getElementById("id005").value = person.standort;
 	document.getElementById("id006").value = person.email;
+	document.getElementById("id000").value = person.id;
+	document.getElementById("id018").value = person.version;
 }
 
 function onSearchClick(event) {
 	event.preventDefault();
+	// ID wird eingeblendet
+//	document.getElementById("id017").classList.remove("hideit");
 	var id = document.getElementById("id000").value;
-	fetch(`/json/person/${id}`, {
-		method: 'GET',  // Optional
-	}) 
-	.then(getJson)
-	.then(getOnePersonAndPackInHtml); 		
+//	if (id != empty ) {
+		fetch(`/json/person/${id}`, {
+			method: 'GET',  // Optional
+		}) 
+		.then(getJson)
+		.then(getOnePersonAndPackInHtml); 
+//	}		
 }
 
 function onDeleteAllClick(event) {
@@ -96,10 +112,6 @@ function onDeleteAllClick(event) {
 	});
 }
 
-function getJson(serverResponse) { 	// serverResponse beinhaltet json mit allen kommunikations-metadaten
-	return serverResponse.json();	// .json ist der reine json-inhalt
-}
-	
 /**
 * Json wird vom Server in Browser ausgegeben
 * hier wird geprüft, ob Liste der Teilnehmern noch leer ist:
@@ -125,13 +137,14 @@ function getAllPersonsFromJsonUndPackInHTMLForTable(myjson) {
 			"<tr>"
 		    	+ `<td> ${++i} </td>` // id automatisch vergeben; Neu: Id wird im Browser gelesen und gespeichert
 				+ "<td><img src='" + getPictoImg(laufvariable.anrede)+"'+ width=25px height=25px></td>"
-				+ "<td>" + laufvariable.id + "</td>"
-				+ "<td>" + laufvariable.anrede + "</td>"
-				+ "<td>" + laufvariable.vorname + "</td>"
-				+ "<td>" + laufvariable.nachname + "</td>"
-				+ "<td>" + laufvariable.birthDate + "</td>"
-				+ "<td>" + laufvariable.standort + "</td>"
-				+ "<td>" + laufvariable.email + "</td>"
+				+ `<td>${laufvariable.id}</td>`
+				+ `<td>${laufvariable.anrede}</td>`
+				+ `<td>${laufvariable.vorname}</td>`
+				+ `<td>${laufvariable.nachname}</td>`
+				+ `<td>${laufvariable.birthDate}</td>`
+				+ `<td>${laufvariable.standort}</td>`
+				+ `<td>${laufvariable.email}</td>`
+//              + `<td>${laufvariable.version}</td>`
 			+ "</tr>")
 			//	document.getElementById("IdAnredeHerr").textContent = laufvariable.anrede;
 			//	document.getElementById("IdVornameMicki").textContent = laufvariable.vorname;
@@ -157,6 +170,9 @@ function refreshTable() {
 			.then(getAllPersonsFromJsonUndPackInHTMLForTable)  // entpricht: cell.textContent = myjson.personen[0].vorname);
 	} catch (exception) { alert("Aktualisierung der Tabelle kann nicht erfolgen!"); }		
 }
+
+// ID wird beim Laden von Sea-Seite ausgeblendet
+// document.getElementById("id017").classList.add("hideit"); 
 
 refreshTable();
 	

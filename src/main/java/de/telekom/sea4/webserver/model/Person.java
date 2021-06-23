@@ -1,5 +1,6 @@
 package de.telekom.sea4.webserver.model;
 
+//import java.beans.Transient;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,25 +20,29 @@ public class Person {
 	private Long id;       // default (-1)
 	
 	@Version
+	@Column
 	private Long version;  // Version des Datensatzes in Datenbank
 	
-	@Column(name="ANREDE")
+	@Column
 	private String anrede;
 	
-	@Column(name="VORNAME")
+	@Column
 	private String vorname;
 	
-	@Column(name="NACHNAME")
+	@Column
 	private String nachname;
 	
 	@Column(name="GEBURTSDATUM")
 	private LocalDate birthDate;
 	
-	@Column(name="STANDORT")
+	@Column
 	private String standort;
 	
-	@Column(name="EMAIL")
+	@Column
 	private String email;
+	
+//	@Transient
+//	private String comment;
 	
 	public Person() {
 	}
@@ -106,5 +111,13 @@ public class Person {
 	
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
+	}
+	
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+	
+	public Long getVersion() {
+		return this.version;
 	}
 }
