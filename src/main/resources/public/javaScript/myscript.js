@@ -28,15 +28,13 @@ function getJson(serverResponse) { 	// serverResponse beinhaltet json mit allen 
 // Submit: aus dem Browser einlesen und an den Server posten (method: POST)
 function oninputclick(event) {   // bei event-click
 	event.preventDefault();      // verhindert dass das event von Browser verwendet wird (verhindert GET-Request)
-	var id = document.getElementById("id000").value;
 	var anrede = document.getElementById("id001").value;
 	var vorname = document.getElementById("id002").value;
 	var nachname = document.getElementById("id003").value;
 	var date = document.getElementById("id004").value;
 	var ort = document.getElementById("id005").value;
 	var email = document.getElementById("id006").value;
-	var version = document.getElementById("id018").value;
-	var jsonDataString = `{"id":"${id}","anrede":"${anrede}","vorname":"${vorname}","nachname":"${nachname}","birthDate":"${date}","standort":"${ort}","email":"${email}", "version":"${version}"}`;
+	var jsonDataString = `{"anrede":"${anrede}","vorname":"${vorname}","nachname":"${nachname}","birthDate":"${date}","standort":"${ort}","email":"${email}"}`;
 		
 	fetch("/json/person", {
 		method: 'POST',
@@ -50,6 +48,9 @@ function oninputclick(event) {   // bei event-click
 // Update: aus dem Browser einlesen und an den Server aktualisieren (method: PUT)
 function onUpdateClick(event) {
 	event.preventDefault();
+	// Feld-Angabe ID einblenden
+	document.getElementById("id017").classList.remove("hideit");
+	document.getElementById("idblink").classList.add("hideit");  
 	var id = document.getElementById("id000").value;
 	var anrede = document.getElementById("id001").value;
 	var vorname = document.getElementById("id002").value;
@@ -70,39 +71,40 @@ function onUpdateClick(event) {
 // Delete: ID aus dem Browser einlesen und an den Server zum DELETE routen
 function onDeleteClick(event) {   
 	event.preventDefault();
-	// ID wird eingeblendet
-//	document.getElementById("id017").classList.remove("hideit"); 
+	// Feld-Angabe ID einblenden
+	document.getElementById("id017").classList.remove("hideit");
+	document.getElementById("idblink").classList.add("hideit"); 
 	var id = document.getElementById("id000").value;
-//	if (id != empty ) { 
 		fetch(`/json/person/${id}`, {
 			method: 'DELETE'
 		});
-//	}	
 }
 
 function getOnePersonAndPackInHtml(person) {
-	document.getElementById("id001").value = person.anrede;
-	document.getElementById("id002").value = person.vorname;
-	document.getElementById("id003").value = person.nachname;
-	document.getElementById("id004").value = person.birthDate;
-	document.getElementById("id005").value = person.standort;
-	document.getElementById("id006").value = person.email;
-	document.getElementById("id000").value = person.id;
-	document.getElementById("id018").value = person.version;
+	if (person.id != undefined) {    // 405:  Method Not Allowed
+		document.getElementById("id001").value = person.anrede;
+		document.getElementById("id002").value = person.vorname;
+		document.getElementById("id003").value = person.nachname;
+		document.getElementById("id004").value = person.birthDate;
+		document.getElementById("id005").value = person.standort;
+		document.getElementById("id006").value = person.email;
+		document.getElementById("id000").value = person.id;
+		document.getElementById("id018").value = person.version;
+	}
+	else { resetById(idform); }	
 }
 
 function onSearchClick(event) {
 	event.preventDefault();
-	// ID wird eingeblendet
-//	document.getElementById("id017").classList.remove("hideit");
+	// Feld-Angabe ID einblenden
+	document.getElementById("id017").classList.remove("hideit");
+	document.getElementById("idblink").classList.add("hideit"); 
 	var id = document.getElementById("id000").value;
-//	if (id != empty ) {
 		fetch(`/json/person/${id}`, {
 			method: 'GET',  // Optional
 		}) 
 		.then(getJson)
 		.then(getOnePersonAndPackInHtml); 
-//	}		
 }
 
 function onDeleteAllClick(event) {
@@ -144,7 +146,7 @@ function getAllPersonsFromJsonUndPackInHTMLForTable(myjson) {
 				+ `<td>${laufvariable.birthDate}</td>`
 				+ `<td>${laufvariable.standort}</td>`
 				+ `<td>${laufvariable.email}</td>`
-//              + `<td>${laufvariable.version}</td>`
+//              + `<td>${laufvariable.version}</td>`  // Version muss nicht in Browser für die Tabelle angezeigt werden, nur intressant für EWU 
 			+ "</tr>")
 			//	document.getElementById("IdAnredeHerr").textContent = laufvariable.anrede;
 			//	document.getElementById("IdVornameMicki").textContent = laufvariable.vorname;
@@ -171,9 +173,7 @@ function refreshTable() {
 	} catch (exception) { alert("Aktualisierung der Tabelle kann nicht erfolgen!"); }		
 }
 
-// ID wird beim Laden von Sea-Seite ausgeblendet
-// document.getElementById("id017").classList.add("hideit"); 
-
+document.getElementById("idblink").classList.remove("hideit"); 
 refreshTable();
 	
 // Submit
