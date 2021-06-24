@@ -3,33 +3,39 @@ package de.telekom.sea4.webserver.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import de.telekom.sea4.webserver.model.MiniPerson;
 import de.telekom.sea4.webserver.model.Person;
 import de.telekom.sea4.webserver.model.Personen;
 import de.telekom.sea4.webserver.repository.PersonRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Service
 public class PersonService {
 
 	private PersonRepository personRepository;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	public PersonService(PersonRepository personRepository) {
 		super();
+		logger.info("MyLogging: PersonService instanziiert! " + this.getClass().toString());
+		logger.info("MyLogging: PersonRepository durch Annotation instanziiert! " + personRepository.getClass().toString());
 		this.personRepository = personRepository;
 	}
 	
 	public long size() {
-		System.out.println("size = " + personRepository.count());
+		logger.info("size: " + personRepository.count());
 		return personRepository.count();
 	}
 	
 	public Personen getAll() {
-		Personen ps = new Personen();
+		Personen persons = new Personen();
 		for (Person p:personRepository.findAll()) {
-			ps.getPersonen().add(p);
+			persons.getPersonen().add(p);
 		}
-		return ps;
+		return persons;
 	}
 	
 	public Optional<Person> get(Long id) {
@@ -46,15 +52,28 @@ public class PersonService {
 
 	public void remove(Long id) {
 		personRepository.deleteById(id);
-		System.out.println("Person ist gelöscht.");
+		logger.info("Person ist gelöscht."+ this.toString());
 	}
 	
 	public Person update(Person person) {
-		System.out.println("Person wird aktualisiert.");
+		logger.info("Person wird aktualisiert."+ this.toString());
 		return personRepository.save(person);
 	}
 
 	public void removeAll() {
 		personRepository.deleteAll();		
+	}
+	
+//	public Iterable<MiniPerson> searchByStandOrt(String ort) {
+//		logger.info("Logging für searchByStandort! " + ort);
+//		return personRepository.selectMiniPerson(ort);	
+//	}
+	
+	public Personen selectPersonen(String ort) {
+		Personen ps = new Personen();
+		for (Person p : personRepository.selectPersonen(ort)) {
+			ps.getPersonen().add(p);
+		}
+		return ps;
 	}
 }

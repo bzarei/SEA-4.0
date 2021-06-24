@@ -1,6 +1,9 @@
 package de.telekom.sea4.webserver.view;
 
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import de.telekom.sea4.webserver.model.Person;
 import de.telekom.sea4.webserver.model.Personen;
 import de.telekom.sea4.webserver.model.Size;
@@ -23,6 +28,7 @@ import de.telekom.sea4.webserver.service.PersonService;
 public class PersonRestController {
 
 	private PersonService personService;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	public PersonRestController(PersonService personService) {
@@ -55,9 +61,9 @@ public class PersonRestController {
 	public ResponseEntity<Person> getPerson(@PathVariable("id") Long id) {
 		Optional<Person> op = personService.get(id);
 		if (op.isEmpty()) {
-			return new ResponseEntity<Person>(HttpStatus.NOT_FOUND);    // 404: not found
+			return new ResponseEntity<Person>(HttpStatus.NOT_FOUND);         // 404: not found
 		} else {
-			return new ResponseEntity<Person>(op.get(),HttpStatus.OK ); // 200: ok 
+			return new ResponseEntity<Person>(op.get(),HttpStatus.OK );      // 200: ok 
 		  }
 	}
 	
@@ -70,7 +76,7 @@ public class PersonRestController {
 		Person pers = personService.add(person);
 		ResponseEntity<Person> respEntity;
 		if (pers == null) {
-			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST);     // 204: bad request
+			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request
 		} else {
 			respEntity = ResponseEntity.ok(pers);
 		  }
@@ -100,4 +106,21 @@ public class PersonRestController {
 		return personService.update(person);
 	}
 	
+/*	@GetMapping("/json/ort/search")  
+	public Iterable<MiniPerson> searchByStandOrt(@RequestParam("searchExpression") String ort) {
+		logger.info("Logging für searchByStandort! Ort: " + ort);
+		return personService.searchByStandOrt(ort); 
+	}
+*/
+	
+	/**
+	 * href="http://localhost:8080/json/search?ort=Bonn"> (Bonn ist ein Beispiel)
+	 * @return
+	 */
+	@GetMapping("/json/search")
+	public Personen searchNachOrt(@RequestParam(name="ort", required=false) String ort) {
+		Personen personen = personService.selectPersonen(ort);
+		logger.info("Ort: " + ort);
+		return personen;
+	}
 }

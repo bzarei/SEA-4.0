@@ -1,12 +1,7 @@
-// suche nach eindeutige id=id4711 in index.html
+/* suche nach eindeutige id=id4711 in index.html
+ * und ersetze durch "Erleben, was verbindet" */
 var para = document.getElementById("id4711");
 para.textContent = "Erleben, was verbindet!";
-
-//  fetch("http://localhost:8080/personen.json");
-//  var cell = document.getElementById("IdSabine");
-//	fetch("personen.json")
-//		.then( irgendwas => irgendwas.json() )
-//		.then(myjson => console.log(myjson.personen[0].vorname));// json einlesen
 
 function getPictoImg(anrede) {
 	switch (anrede) {
@@ -25,7 +20,7 @@ function getJson(serverResponse) { 	// serverResponse beinhaltet json mit allen 
 	return serverResponse.json();	// .json ist der reine json-inhalt
 }
 
-// Submit: aus dem Browser einlesen und an den Server posten (method: POST)
+// Submit: Daten aus dem Browser einlesen und an den Server senden (method: POST)
 function oninputclick(event) {   // bei event-click
 	event.preventDefault();      // verhindert dass das event von Browser verwendet wird (verhindert GET-Request)
 	var anrede = document.getElementById("id001").value;
@@ -45,11 +40,10 @@ function oninputclick(event) {   // bei event-click
 	onRefreshClick();
 }
 
-// Update: aus dem Browser einlesen und an den Server aktualisieren (method: PUT)
+// Update: ID und Daten (neu) dazu aus dem Browser einlesen und an den Server senden (method: PUT)
 function onUpdateClick(event) {
 	event.preventDefault();
-	// Feld-Angabe ID einblenden
-	document.getElementById("id017").classList.remove("hideit");
+	document.getElementById("id017").classList.remove("hideit");  // Feld-Eigabe ID einblenden
 	document.getElementById("idblink").classList.add("hideit");  
 	var id = document.getElementById("id000").value;
 	var anrede = document.getElementById("id001").value;
@@ -68,11 +62,10 @@ function onUpdateClick(event) {
 	});	
 }
 
-// Delete: ID aus dem Browser einlesen und an den Server zum DELETE routen
+// Delete: ID aus dem Browser einlesen und an den Server zum Löschen routen
 function onDeleteClick(event) {   
 	event.preventDefault();
-	// Feld-Angabe ID einblenden
-	document.getElementById("id017").classList.remove("hideit");
+	document.getElementById("id017").classList.remove("hideit");  // Feld-Eigabe ID einblenden
 	document.getElementById("idblink").classList.add("hideit"); 
 	var id = document.getElementById("id000").value;
 		fetch(`/json/person/${id}`, {
@@ -94,10 +87,10 @@ function getOnePersonAndPackInHtml(person) {
 	else { resetById(idform); }	
 }
 
+// Search: suche nach Daten zu einer ID und in Browser anzeigen
 function onSearchClick(event) {
 	event.preventDefault();
-	// Feld-Angabe ID einblenden
-	document.getElementById("id017").classList.remove("hideit");
+	document.getElementById("id017").classList.remove("hideit");  // Feld-Eigabe ID einblenden
 	document.getElementById("idblink").classList.add("hideit"); 
 	var id = document.getElementById("id000").value;
 		fetch(`/json/person/${id}`, {
@@ -107,6 +100,7 @@ function onSearchClick(event) {
 		.then(getOnePersonAndPackInHtml); 
 }
 
+// Delete all: Alle Datensätze aus DB werden gelöscht!
 function onDeleteAllClick(event) {
 	event.preventDefault();
 	fetch("/json/person/all", {
@@ -148,8 +142,6 @@ function getAllPersonsFromJsonUndPackInHTMLForTable(myjson) {
 				+ `<td>${laufvariable.email}</td>`
 //              + `<td>${laufvariable.version}</td>`  // Version muss nicht in Browser für die Tabelle angezeigt werden, nur intressant für EWU 
 			+ "</tr>")
-			//	document.getElementById("IdAnredeHerr").textContent = laufvariable.anrede;
-			//	document.getElementById("IdVornameMicki").textContent = laufvariable.vorname;
 	}
 }
 
