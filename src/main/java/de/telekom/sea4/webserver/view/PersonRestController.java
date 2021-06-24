@@ -106,8 +106,8 @@ public class PersonRestController {
 		return personService.update(person);
 	}
 	
-/*	@GetMapping("/json/ort/search")  
-	public Iterable<MiniPerson> searchByStandOrt(@RequestParam("searchExpression") String ort) {
+/*	@GetMapping("/json/search/{ort}")  
+	public Iterable<MiniPerson> searchByStandOrt(@RequestParam("ort") String ort) {
 		logger.info("Logging für searchByStandort! Ort: " + ort);
 		return personService.searchByStandOrt(ort); 
 	}

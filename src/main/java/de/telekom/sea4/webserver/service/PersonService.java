@@ -3,7 +3,7 @@ package de.telekom.sea4.webserver.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import de.telekom.sea4.webserver.model.MiniPerson;
+//import de.telekom.sea4.webserver.model.MiniPerson;
 import de.telekom.sea4.webserver.model.Person;
 import de.telekom.sea4.webserver.model.Personen;
 import de.telekom.sea4.webserver.repository.PersonRepository;

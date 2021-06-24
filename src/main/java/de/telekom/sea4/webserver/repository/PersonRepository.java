@@ -15,7 +15,7 @@ public interface PersonRepository extends CrudRepository<Person, Long> {  // ode
 //	@Query(value="SELECT vorname, nachname, standort FROM persons_sea4 WHERE standort = ?1",nativeQuery=true)
 //	public Iterable<MiniPerson> selectMiniPerson(String searchExpression);
 	
-	@Query(value="SELECT * FROM persons_sea4 WHERE standort=:ort",nativeQuery=true )
+	@Query(value="SELECT * FROM persons_sea4 WHERE standort=:ort",nativeQuery=true)
 //	@Query(value="SELECT * FROM persons_sea4",nativeQuery=true ) // suche nach alle Personen 
 	Iterable<Person> selectPersonen(@Param("ort") String ort);	 // suche nach alle Personen aus einem bestimmten Ort
 }
