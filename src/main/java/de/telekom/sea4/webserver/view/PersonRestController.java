@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import de.telekom.sea4.webserver.model.Person;
 import de.telekom.sea4.webserver.model.Personen;
 import de.telekom.sea4.webserver.model.Size;
@@ -73,6 +72,7 @@ public class PersonRestController {
 	 */
 	@PostMapping("/json/person")  
 	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+		logger.info(String.format("Class: %s Person mit mit ID %s wird angelegt.",this.getClass().toString(),person.getId()));
 		Person pers = personService.add(person);
 		ResponseEntity<Person> respEntity;
 		if (pers == null) {
@@ -90,6 +90,7 @@ public class PersonRestController {
 	@DeleteMapping("/json/person/{id}")  
 	public void removePerson(@PathVariable("id") int id) {
 		personService.remove((long) id);
+		logger.info(String.format("Class: %s Person mit ID %s ist gelöscht.",this.getClass().toString(),id));
 	}
 	
 	@DeleteMapping("/json/person/all")  
@@ -103,15 +104,9 @@ public class PersonRestController {
 	 */
 	@PutMapping("/json/person/{id}")  
 	public Person updatePerson(@PathVariable("id") Long id, @RequestBody Person person) {
+		logger.info(String.format("Class: %s Daten für Person mit ID %s werden aktualisiert.",this.getClass().toString(),id));
 		return personService.update(person);
 	}
-	
-/*	@GetMapping("/json/search/{ort}")  
-	public Iterable<MiniPerson> searchByStandOrt(@RequestParam("ort") String ort) {
-		logger.info("Logging für searchByStandort! Ort: " + ort);
-		return personService.searchByStandOrt(ort); 
-	}
-*/
 	
 	/**
 	 * href="http://localhost:8080/json/search?ort=Bonn"> (Bonn ist ein Beispiel)
@@ -120,7 +115,18 @@ public class PersonRestController {
 	@GetMapping("/json/search")
 	public Personen searchNachOrt(@RequestParam(name="ort", required=false) String ort) {
 		Personen personen = personService.selectPersonen(ort);
-		logger.info("Ort: " + ort);
+		logger.info(String.format("Class: %s Suche nach alle Personen in Standort: %s gestartet.",this.getClass().toString(),ort));
+		return personen;
+	}
+	
+	/**
+	 * href="http://localhost:8080/json/search/name?lastname=Kohl"> (Kohl ist ein Beispiel)
+	 * @return
+	 */
+	@GetMapping("/json/search/name")
+	public Personen searchByName(@RequestParam(name="lastname", required=false) String lastname) {
+		Personen personen = personService.searchPersonenByName(lastname);
+		logger.info(String.format("Class: %s Suche nach alle Personen mit Nachname=%s gestartet.",this.toString(),lastname));
 		return personen;
 	}
 }

@@ -11,11 +11,12 @@ public interface PersonRepository extends CrudRepository<Person, Long> {  // ode
 	
 	//No code is necessary
 	//This area is needed for working Spring-Boot
-		
-//	@Query(value="SELECT vorname, nachname, standort FROM persons_sea4 WHERE standort = ?1",nativeQuery=true)
-//	public Iterable<MiniPerson> selectMiniPerson(String searchExpression);
 	
+	// suche nach alle Personen aus einem bestimmten Ort	
 	@Query(value="SELECT * FROM persons_sea4 WHERE standort=:ort",nativeQuery=true)
-//	@Query(value="SELECT * FROM persons_sea4",nativeQuery=true ) // suche nach alle Personen 
-	Iterable<Person> selectPersonen(@Param("ort") String ort);	 // suche nach alle Personen aus einem bestimmten Ort
+	Iterable<Person> selectPersonen(@Param("ort") String ort);
+	
+	// suche nach alle Personen mit bestimmten Nachnamen
+	@Query(value="SELECT * FROM persons_sea4 WHERE nachname=:lastname",nativeQuery=true)
+	Iterable<Person> selectPersonenByName(@Param("lastname") String lastname);	 
 }

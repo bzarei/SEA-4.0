@@ -56,13 +56,15 @@
 						<td><input type="date" id="id004" name="datum"></td>
 						<td><label for="id005">Standort:</label></td>
 						<td><select name="standort" id="id005">
-							<option>Berlin</option>
-							<option>Bonn</option>
-							<option>Budapest</option>
-							<option>Darmstadt</option>
-							<option>Koeln</option>
-							<option>Muenster</option>
-							<option>Magdeburg</option>
+								<option>Berlin</option>
+								<option>Bonn</option>
+								<option>Budapest</option>
+								<option>Darmstadt</option>
+								<option>Koeln</option>
+								<option>Muenster</option>
+								<option>Magdeburg</option>
+								<option>Sankt-Petersburg</option>
+								<option>Ulm</option>
 						</select></td>
 						<td><label for="id006">E-Mail:</label></td>
 						<td><input type="email" id="id006" name="email"></td>
@@ -76,9 +78,40 @@
 						<input type="submit" id="id013" value="Update">
 						<input type="submit" id="id014" value="Delete all">
 						<input type="submit" id="id015" value="Refresh">											
-						<input type="submit" id="id016" value="Search"></td>
+						<input type="submit" id="id016" value="Search">	
+						<br/><br/><label for="id021">Teilnehmer aus Standort:</label>
+							<select name="standort" id="id021" style="width: 10%">
+								<option>Berlin</option>
+								<option>Bonn</option>
+								<option>Budapest</option>
+								<option>Darmstadt</option>
+								<option>Koeln</option>
+								<option>Muenster</option>
+								<option>Magdeburg</option>
+								<option>Sankt-Petersburg</option>
+								<option>Ulm</option>
+							</select>
+						<input type="submit" id="id020" value="los"></td>																
 					</tr>
-				</table>
+				</table>						
+				<div class="smalltableFixHead hideit" id="div001">	
+					<table style="border:1px solid #888a85" class="table table-dark" id="tid002">
+						<thead id="thid002"> 
+						<tr> 
+							<th scope="col">#</th>
+							<th scope="col">ID</th>
+							<th scope="col">Anrede</th>
+							<th scope="col">Vorname</th>
+							<th scope="col">Nachname</th>
+							<th scope="col">Geburtsdatum</th>
+							<th scope="col">E-Mail-Adresse</th>
+							<th scope="col">Standort</th>
+						</tr>
+						</thead>
+						<tbody id="tbid002">						
+						</tbody>
+					</table>
+				</div>			
 			</form>				
 	</article>
 	<div>

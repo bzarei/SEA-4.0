@@ -145,13 +145,46 @@ function getAllPersonsFromJsonUndPackInHTMLForTable(myjson) {
 	}
 }
 
+function getSearchResultFromJsonUndPackInHTML(myjson) {
+	var i = 0; 
+	var t_body = document.getElementById("tbid002"); 
+	// Search table wird neu gebaut
+	for (var laufvariable of myjson.personen) {
+		t_body.insertAdjacentHTML("beforeend",
+			"<tr>"
+		    	+ `<td> ${++i} </td>` // id automatisch vergeben; Neu: Id wird im Browser gelesen und gespeichert
+				+ `<td>${laufvariable.id}</td>`
+				+ `<td>${laufvariable.anrede}</td>`
+				+ `<td>${laufvariable.vorname}</td>`
+				+ `<td>${laufvariable.nachname}</td>`
+				+ `<td>${laufvariable.birthDate}</td>`
+				+ `<td>${laufvariable.email}</td>`
+				+ `<td>${laufvariable.standort}</td>`
+			+ "</tr>")
+	}
+}
+
 function resetById(id) {
 	document.getElementById(id).reset();
 }
 
 function onRefreshClick() {
-	document.getElementById(tbid001).innerHTML="";
+	document.getElementById("tbid001").innerHTML="";
 	refreshTable();
+}
+  
+function onLosClick(event) {
+	event.preventDefault();
+	document.getElementById("tbid002").innerHTML="";
+	buildSearchTable();	
+} 
+
+function buildSearchTable() {
+	document.getElementById("div001").classList.remove("hideit"); // do div sichtbar
+	var standort = document.getElementById("id021").value;
+	fetch(`/json/search?ort=${standort}`)   // Query Parameter: ort=${standort}
+		.then(getJson) 				  	 
+		.then(getSearchResultFromJsonUndPackInHTML)  		
 }
 
 /* bei jedem neu laden dieser Seite "/index.html" wird diese Funktion aufgerufen und die Tabelle
@@ -164,6 +197,7 @@ function refreshTable() {
 			.then(getAllPersonsFromJsonUndPackInHTMLForTable)  // entpricht: cell.textContent = myjson.personen[0].vorname);
 	} catch (exception) { alert("Aktualisierung der Tabelle kann nicht erfolgen!"); }		
 }
+
 
 document.getElementById("idblink").classList.remove("hideit"); 
 refreshTable();
@@ -185,6 +219,9 @@ document.getElementById("id015").addEventListener("click",onRefreshClick);
 
 // Search
 document.getElementById("id016").addEventListener("click",onSearchClick);
+
+// Search by Standort
+document.getElementById("id020").addEventListener("click",onLosClick);
 
 		
 		
