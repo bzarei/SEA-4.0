@@ -32,7 +32,7 @@ public class Person {
 	@Column
 	private String nachname;
 	
-	@Column(name="GEBURTSDATUM")
+	@Column(name="GEBURTSDATUM") // Column name in DB
 	private LocalDate birthDate;
 	
 	@Column

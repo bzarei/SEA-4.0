@@ -97,3 +97,13 @@ td {
 	top: 0;
 }
 
+.smalltableFixHead {
+	overflow-y: auto;
+	height: 150px;
+}
+
+.smalltableFixHead thead th {
+	position: sticky;
+	top: 0;
+}
+
