@@ -119,4 +119,8 @@ public class Person {
 	public Long getVersion() {
 		return this.version;
 	}
+	
+	public String toString() {
+		return vorname + " " + nachname + " " + this.birthDate.toString() + " " + standort + " " + email; 
+	}
 }

@@ -14,3 +14,11 @@ buildNumber.properties
 .project
 /bin/
 my.log
+.zip
+.log
+.rar
+.gz
+.war
+.nar
+.ear
+

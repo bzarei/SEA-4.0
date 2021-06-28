@@ -1,5 +1,6 @@
 package de.telekom.sea4.webserver.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,11 +41,25 @@ public class PersonService {
 	public Optional<Person> get(Long id) {
 	  	return personRepository.findById(id); 
 	}
-	
+	/**
+	 * es wird geprüft ob vorname, nachname, Geburtsdatum, Standort und email nicht identisch sind.
+	 * sollte der fall sein wird eine Neuanlage der Person abgewisen. Sonst wird neue Person angelegt.
+	 * @param person
+	 * @return
+	 */
 	public Person add(Person person) {
 		if (person.getId() == null) {
 			person.setId(-1L);   // set Id to default value
 		} 
+		Personen persons = getAll();
+		List<Person> personen = persons.getPersonen();	
+		for (int i = 0; i < persons.getPersonen().size(); i++) {	
+			if ((personen.get(i).toString()) == (person.toString())) {
+				logger.info(String.format("Person %s %s %s %s %s existiert bereits mit ID %s. Eine Neuanlage ist nicht möglich!", 
+						person.getVorname(), person.getNachname(),person.getBirthDate(), person.getStandort(),person.getEmail(),personen.get(i).getId()));
+				return null;
+			}	
+		}
 		logger.info(String.format("Person mit ID %s ist neu angelegt: %s %s %s %s %s",person.getId(), 
 				person.getVorname(), person.getNachname(),person.getBirthDate(), person.getStandort(),person.getEmail()));
 		return personRepository.save(person);

@@ -71,14 +71,16 @@ public class PersonRestController {
 	 * @return
 	 */
 	@PostMapping("/json/person")  
-	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-		logger.info(String.format("Class: %s Person mit mit ID %s wird angelegt.",this.getClass().toString(),person.getId()));
+	public ResponseEntity<Person> addPerson(@RequestBody Person person) {		
 		Person pers = personService.add(person);
 		ResponseEntity<Person> respEntity;
 		if (pers == null) {
 			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request
+			logger.info(String.format("Person existiert bereits, eine Neuanlage ist nicht möglich!")); 
+					
 		} else {
 			respEntity = ResponseEntity.ok(pers);
+			logger.info(String.format("Class: %s Person mit ID %s wird angelegt.",this.getClass().toString(),person.getId()));
 		  }
 		return respEntity;
 	}
