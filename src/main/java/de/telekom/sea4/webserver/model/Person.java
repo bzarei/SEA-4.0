@@ -1,6 +1,5 @@
 package de.telekom.sea4.webserver.model;
 
-//import java.beans.Transient;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;

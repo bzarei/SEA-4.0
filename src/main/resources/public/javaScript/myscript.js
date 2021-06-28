@@ -106,10 +106,15 @@ function onSearchClick(event) {
 // Delete all: Alle Datensätze aus DB werden gelöscht!
 function onDeleteAllClick(event) {
 	event.preventDefault();
-	alert("Alle Datensätze werden aus DB endgueltig gelöscht! sind Sie sicher??");
-	fetch("/json/person/all", {
-		method: 'DELETE'
-	});
+	var check = confirm('Wollen Sie alle Teilnehmer dieser Liste wirklich endgültig löschen?'); 
+	if (check == false) {
+		history.back();
+	} else {
+		alert("Alle Datensätze werden aus DB endgueltig gelöscht!");
+		fetch("/json/person/all", {
+			method: 'DELETE'
+		});
+	  }	
 }
 
 /**
