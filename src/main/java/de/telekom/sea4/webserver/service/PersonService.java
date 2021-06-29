@@ -40,12 +40,17 @@ public class PersonService {
 	public Optional<Person> get(Long id) {
 	  	return personRepository.findById(id); 
 	}
-	
+	/**
+	 * es wird geprüft ob vorname, nachname, Geburtsdatum, Standort und email nicht identisch sind.
+	 * sollte der fall sein wird eine Neuanlage der Person abgewisen. Sonst wird neue Person angelegt.
+	 * @param person
+	 * @return
+	 */
 	public Person add(Person person) {
 		if (person.getId() == null) {
 			person.setId(-1L);   // set Id to default value
-		} 
-		logger.info(String.format("Person mit ID %s ist neu angelegt: %s %s %s %s %s",person.getId(), 
+		} 		
+		logger.info(String.format("Neue Person ist angelegt: %s %s %s %s %s", 
 				person.getVorname(), person.getNachname(),person.getBirthDate(), person.getStandort(),person.getEmail()));
 		return personRepository.save(person);
 	}

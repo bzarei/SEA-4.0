@@ -44,6 +44,7 @@ function oninputclick(event) {   // bei event-click
 function onUpdateClick(event) {
 	event.preventDefault();
 	document.getElementById("id017").classList.remove("hideit");  // Feld-Eigabe ID einblenden
+	document.getElementById("id010").classList.add("hideit");     // Submit ausblenden 
 	document.getElementById("idblink").classList.add("hideit");  
 	var id = document.getElementById("id000").value;
 	var anrede = document.getElementById("id001").value;
@@ -66,6 +67,7 @@ function onUpdateClick(event) {
 function onDeleteClick(event) {   
 	event.preventDefault();
 	document.getElementById("id017").classList.remove("hideit");  // Feld-Eigabe ID einblenden
+	document.getElementById("id010").classList.add("hideit");     // Submit ausblenden
 	document.getElementById("idblink").classList.add("hideit"); 
 	var id = document.getElementById("id000").value;
 		fetch(`/json/person/${id}`, {
@@ -91,6 +93,7 @@ function getOnePersonAndPackInHtml(person) {
 function onSearchClick(event) {
 	event.preventDefault();
 	document.getElementById("id017").classList.remove("hideit");  // Feld-Eigabe ID einblenden
+	document.getElementById("id010").classList.add("hideit");     // Submit ausblenden
 	document.getElementById("idblink").classList.add("hideit"); 
 	var id = document.getElementById("id000").value;
 		fetch(`/json/person/${id}`, {
@@ -103,9 +106,15 @@ function onSearchClick(event) {
 // Delete all: Alle Datensätze aus DB werden gelöscht!
 function onDeleteAllClick(event) {
 	event.preventDefault();
-	fetch("/json/person/all", {
-		method: 'DELETE'
-	});
+	var check = confirm('Wollen Sie alle Teilnehmer dieser Liste wirklich endgültig löschen?'); 
+	if (check == false) {
+		history.back();
+	} else {
+		alert("Alle Datensätze werden aus DB endgueltig gelöscht!");
+		fetch("/json/person/all", {
+			method: 'DELETE'
+		});
+	  }	
 }
 
 /**
@@ -140,6 +149,8 @@ function getAllPersonsFromJsonUndPackInHTMLForTable(myjson) {
 				+ `<td>${laufvariable.birthDate}</td>`
 				+ `<td>${laufvariable.standort}</td>`
 				+ `<td>${laufvariable.email}</td>`
+//				+ `<td><img id='edit${laufvariable.id}'src='images/edit.png' onclick='onEditClick("row${i}", ${laufvariable.id}, ${i}, ${laufvariable.version})' title='Bearbeiten'></td>`
+//			 	+ `<td><img id='delete${laufvariable.id}'src='images/delete.png' onclick='onDelClick(${laufvariable.id})' title='Entfernen'></td>`
 //              + `<td>${laufvariable.version}</td>`  // Version muss nicht in Browser für die Tabelle angezeigt werden, nur intressant für EWU 
 			+ "</tr>")
 	}
@@ -200,6 +211,7 @@ function refreshTable() {
 
 
 document.getElementById("idblink").classList.remove("hideit"); 
+document.getElementById("id010").classList.remove("hideit");
 refreshTable();
 	
 // Submit

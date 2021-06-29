@@ -1,6 +1,5 @@
 package de.telekom.sea4.webserver.model;
 
-//import java.beans.Transient;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -119,5 +118,9 @@ public class Person {
 	
 	public Long getVersion() {
 		return this.version;
+	}
+	
+	public String toString() {
+		return vorname + " " + nachname + " " + this.birthDate.toString() + " " + standort + " " + email; 
 	}
 }
