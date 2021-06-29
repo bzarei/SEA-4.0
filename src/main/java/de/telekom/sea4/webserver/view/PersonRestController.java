@@ -75,12 +75,11 @@ public class PersonRestController {
 		Person pers = personService.add(person);
 		ResponseEntity<Person> respEntity;
 		if (pers == null) {
-			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request
-			logger.info(String.format("Person existiert bereits, eine Neuanlage ist nicht möglich!")); 
-					
+			logger.info("Person existiert bereits, eine Neuanlage ist nicht möglich!");
+			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request 
 		} else {
-			respEntity = ResponseEntity.ok(pers);
 			logger.info(String.format("Class: %s Person mit ID %s wird angelegt.",this.getClass().toString(),person.getId()));
+			respEntity = ResponseEntity.ok(pers);
 		  }
 		return respEntity;
 	}
