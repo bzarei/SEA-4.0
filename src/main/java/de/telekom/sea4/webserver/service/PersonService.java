@@ -1,5 +1,6 @@
 package de.telekom.sea4.webserver.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,13 +47,21 @@ public class PersonService {
 	 * @param person
 	 * @return
 	 */
-	public Person add(Person person) {
-		if (person.getId() == null) {
-			person.setId(-1L);   // set Id to default value
-		} 		
+	public Person add(Person person) {	
+		// check if name and lastname of person are empty 
+		if (person.getNachname() == "" && person.getVorname() == "") return null;
+		//DublettenCheck
+		Personen all = getAll();
+		List<Person> listOfAllInDB = all.getPersonen();
+		for (int i=0; i < listOfAllInDB.size(); i++) {
+			if (person.toString().equals(listOfAllInDB.get(i).toString()) && 
+				person.getBirthDate() == listOfAllInDB.get(i).getBirthDate()) { 
+					return person;
+				}
+		}
 		logger.info(String.format("Neue Person ist angelegt: %s %s %s %s %s", 
 				person.getVorname(), person.getNachname(),person.getBirthDate(), person.getStandort(),person.getEmail()));
-		return personRepository.save(person);
+		return personRepository.save(person);	
 	}
 
 	public void remove(Long id) {
@@ -63,6 +72,7 @@ public class PersonService {
 	public Person update(Person person) {
 		logger.info(String.format("Person mit ID %s ist modifiziert: %s %s %s %s %s",person.getId(), 
 				person.getVorname(), person.getNachname(),person.getBirthDate(), person.getStandort(),person.getEmail()));
+		
 		return personRepository.save(person);
 	}
 
