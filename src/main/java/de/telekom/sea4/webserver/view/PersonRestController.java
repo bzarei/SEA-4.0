@@ -43,7 +43,7 @@ public class PersonRestController {
 		return personService.getAll();
 	}
 	
-	/**
+	/**GET ist http Methode
 	 * @see <a href="http://localhost:8080/json/persons/size">http://localhost:8080/json/persons/size</a>
 	 * @return
 	 */
@@ -74,10 +74,15 @@ public class PersonRestController {
 	public ResponseEntity<Person> addPerson(@RequestBody Person person) {		
 		Person pers = personService.add(person);
 		ResponseEntity<Person> respEntity;
-		if (pers == null) {
+		if (pers == person) {
 			logger.info("Person existiert bereits, eine Neuanlage ist nicht möglich!");
 			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request 
-		} else {
+		} 
+		if (pers == null) {
+			logger.info("AngabeFelder sind nicht befüllt - Person kann nicht angelegt werden!");
+			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request 
+		} 
+		else {	 
 			logger.info(String.format("Class: %s Person mit ID %s wird angelegt.",this.getClass().toString(),person.getId()));
 			respEntity = ResponseEntity.ok(pers);
 		  }
