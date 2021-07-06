@@ -77,10 +77,12 @@ public class PersonRestController {
 		if (pers == person) {
 			logger.info("Person existiert bereits, eine Neuanlage ist nicht möglich!");
 			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request 
+			return respEntity;
 		} 
 		if (pers == null) {
 			logger.info("AngabeFelder sind nicht befüllt - Person kann nicht angelegt werden!");
-			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request 
+			respEntity = new ResponseEntity<Person>(HttpStatus.BAD_REQUEST); // 204: bad request
+			return respEntity;
 		} 
 		else {	 
 			logger.info(String.format("Class: %s Person mit ID %s wird angelegt.",this.getClass().toString(),person.getId()));

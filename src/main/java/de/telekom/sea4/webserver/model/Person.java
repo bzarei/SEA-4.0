@@ -122,6 +122,7 @@ public class Person {
 
 	@Override
 	public String toString() { 
-		return vorname + " " + nachname + " " + standort + " " + email;
+		if (this.birthDate == null) setBirthDate(LocalDate.now());
+		return vorname + " " + nachname + " " + birthDate.toString() + " " + standort + " " + email;
 	}
 }
