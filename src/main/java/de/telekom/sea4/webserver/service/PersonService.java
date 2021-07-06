@@ -1,6 +1,5 @@
 package de.telekom.sea4.webserver.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,9 @@ public class PersonService {
 		List<Person> listOfAllInDB = all.getPersonen();
 		for (int i=0; i < listOfAllInDB.size(); i++) {
 			if (person.toString().equals(listOfAllInDB.get(i).toString())) {
-					return person;
+				logger.info(String.format("Person: %s %s %s %s %s existiert bereits,eine Neuanlage ist nicht möglich!", 
+						person.getVorname(), person.getNachname(),person.getBirthDate(), person.getStandort(),person.getEmail()));
+				return person;
 			}
 		}
 		logger.info(String.format("Neue Person ist angelegt: %s %s %s %s %s", 
