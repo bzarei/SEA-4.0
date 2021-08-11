@@ -209,6 +209,26 @@ function refreshTable() {
 	} catch (exception) { alert("Aktualisierung der Tabelle kann nicht erfolgen!"); }		
 }
 
+function onEditClick(row, id, counter, version) {
+	var editRow = document.getElementById(row);
+    var id = editRow.cells[0].innerHTML;
+	var salut = editRow.cells[1].innerHTML;
+	var firstname = editRow.cells[2].innerHTML;
+	var lastname = editRow.cells[3].innerHTML;
+	var birthday = editRow.cells[4].innerHTML;
+	var location = editRow.cells[5].innerHTML;
+	var email = editRow.cells[6].innerHTML;
+	editRow.innerHTML = `<th> ${id}   </th>`
+			+	`<td contenteditable> ${salut}</td>` 
+			+	`<td contenteditable> ${firstname}</td>`
+			+	`<td contenteditable> ${lastname}</td>`
+			+	`<td contenteditable> ${birthday}</td>`
+			+	`<td contenteditable> ${location}</td>`
+			+	`<td contenteditable> ${email}</td>`
+			+	`<td><img class='icon' src='${getIcon(salut)}'></td>`
+			+	`<td><img class='icon' id='save${id}'src='img/save.png' onclick='savePerson("row${counter}", ${id}, ${counter}, ${version})' title='Speichern'></td>`
+			+	`<td><img class='icon' id='delete${id}'src='img/delete.jpeg' onclick='deletePerson(${id})' title='Entfernen'></td>`;
+}
 
 document.getElementById("idblink").classList.remove("hideit"); 
 document.getElementById("id010").classList.remove("hideit");
